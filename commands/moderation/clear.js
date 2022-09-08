@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const { MessageEmbed } = require("discord.js");
 const { Color } = require("../../config.js");
-
+const userID = "428872151672684544";
 module.exports = {
   name: "clear",
   aliases: ["purge", "clearmsgs"],
@@ -10,7 +10,10 @@ module.exports = {
   run: async (client, message, args) => {
     //Start
     message.delete();
-    if (!message.member.hasPermission("MANAGE_MESSAGES"))
+    if (
+      !message.author.id === userID ||
+      !message.member.hasPermission(["MANAGE_GUILD"])
+    )
       return message.channel.send(
         "You Don't Have Permission To Use This Command!"
       );
@@ -21,11 +24,6 @@ module.exports = {
     if (isNaN(args[0]))
       return message.channel.send(`Please Give Me Number Value!`);
 
-    if (args[0] < 4)
-      return message.channel.send(
-        `You Can Delete ${args[0]} By Your Self Its Not Too Many Messages!`
-      );
-
     if (args[0] > 100)
       return message.channel.send(
         `I Can't Delete ${args[0]} Because Of Discord Limit!`
@@ -33,7 +31,7 @@ module.exports = {
 
     let Reason = args.slice(1).join(" ") || "No Reason Provided!";
 
-    message.channel.bulkDelete(args[0]).then(Message => {
+    message.channel.bulkDelete(args[0]).then((Message) => {
       let embed = new Discord.MessageEmbed()
         .setColor(Color)
         .setTitle(`Messages Deleted!`)
@@ -45,9 +43,9 @@ module.exports = {
         .setTimestamp();
       return message.channel
         .send(embed)
-        .then(msg => msg.delete({ timeout: 10000 }));
+        .then((msg) => msg.delete({ timeout: 10000 }));
     });
 
     //End
-  }
+  },
 };
