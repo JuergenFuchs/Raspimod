@@ -10,15 +10,17 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@iamtraction/google-translate": "^1.1.2",
+    "discord.js": "^14.3.0",
     "express": "^4.17.1",
-    "discord.js": "^12.3.1",
-    "fs": "^0.0.2",
-    "node-fetch": "^2.6.1",
     "figlet": "^1.5.0",
-    "util": "^0.12.3",
-    "novelcovid": "^3.0.0",
-    "quick.db": "^7.1.1",
+    "fs": "^0.0.2",
+    "got": "^12.4.1",
     "ms": "^2.1.2",
+    "node-fetch": "^2.6.7",
+    "novelcovid": "^3.0.0",
+    "quick.db": "^9.0.6",
+    "util": "^0.12.3",
     "weather-js": "^2.0.0"
   },
   "engines": {
