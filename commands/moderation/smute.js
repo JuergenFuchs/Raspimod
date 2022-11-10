@@ -2,10 +2,10 @@ const Discord = require("discord.js");
 const { MessageEmbed } = require("discord.js");
 const { Color } = require("../../config.js");
 module.exports = {
-  name: "clear",
-  aliases: ["purge", "clearmsgs"],
-  description: "Clear Your Messages!",
-  usage: "Clear <Message Amount>",
+  name: "servermute",
+  aliases: ["smute", "servermute"],
+  description: "Servermute a member",
+  usage: "smute <Member ID>",
   run: async (client, message, args) => {
     //Start
     message.delete();
@@ -20,21 +20,9 @@ module.exports = {
       return message.channel.send(
         `You Don't Have Permission To Use This Command!`
       );
-    if (!args[0])
-      return message.channel.send(`Please Give Me Amounts Of Messages!`);
-
-    if (isNaN(args[0]))
-      return message.channel.send(`Please Give Me Number Value!`);
-
-    if (args[0] > 100)
-      return message.channel.send(
-        `I Can't Delete ${args[0]} Because Of Discord Limit!`
-      );
-
-    let Reason = args.slice(1).join(" ") || "No Reason Provided!";
-
-    message.channel.bulkDelete(args[0]).then((Message) => {});
-
+    let person = message.guild.member(message.mentions.users.first());
+        await person.edit({mute: true});
     //End
   },
 };
+

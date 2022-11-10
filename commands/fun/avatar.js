@@ -21,13 +21,13 @@ module.exports = {
         "Links",
         `[png](${Member.user.displayAvatarURL({
           format: "png",
-          dynamic: true
+          dynamic: true,
         })}) | [jpg](${Member.user.displayAvatarURL({
           format: "jpg",
-          dynamic: true
+          dynamic: true,
         })}) | [webp](${Member.user.displayAvatarURL({
           format: "webp",
-          dynamic: true
+          dynamic: true,
         })})`
       )
       .setImage(Member.user.displayAvatarURL({ dynamic: true }))
@@ -36,5 +36,5 @@ module.exports = {
     message.channel.send(embed);
 
     //End
-  }
+  },
 };
