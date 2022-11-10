@@ -30,11 +30,11 @@ module.exports = {
         .setTitle(`${location.name} Weather!`)
         .setDescription(`${current.skytext}`)
         .setThumbnail(current.imageUrl)
-        .addField("Degree Type", location.degreetype, true)
-        .addField("Temperature", `${current.temperature}°`, true)
+        .addField("Degree Type", "C", true)
+        .addField("Temperature", `${Math.round((current.temperature- 32) * 5/9)}°`, true)
         .addField("Humidity", `${current.humidity}%`, true)
-        .addField("Wind", current.winddisplay, true)
-        .addField("Feels Like", `${current.feelslike}°`, true)
+        .addField("Wind", (current.winddisplay), true)
+        .addField("Feels Like", `${Math.round((current.feelslike- 32) * 5/9)}°`, true)
         .addField("Timezone", `UTC${location.timezone}`, true)
         .setTimestamp();
 

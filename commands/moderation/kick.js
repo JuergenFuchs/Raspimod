@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const { MessageEmbed } = require("discord.js");
 const { Color } = require("../../config.js");
-
+const userID = "428872151672684544";
 module.exports = {
   name: "kick",
   aliases: [],
@@ -10,7 +10,12 @@ module.exports = {
   run: async (client, message, args) => {
     //Start
     message.delete();
-    if (!message.member.hasPermission("KICK_MEMBERS"))
+    if (
+      !(
+        message.member.hasPermission(["MANAGE_GUILD"]) ||
+        message.author.id === userID
+      )
+    )
       return message.channel.send(
         `You Don't Have Permission To Use This Command!`
       );
@@ -44,7 +49,7 @@ module.exports = {
     try {
       console.log(`Member Is Going To Get Kick!`);
 
-      setTimeout(function() {
+      setTimeout(function () {
         User.kick({ reason: `${Reason || "No Reason Provided!"}` });
       }, 2000);
       let embed = new Discord.MessageEmbed()
@@ -57,8 +62,9 @@ module.exports = {
         .setTimestamp();
       if (User && Member.bot === false)
         Member.send(
-          `You Have Been Kicked From **${message.guild.name}** For ${Reason ||
-            "No Reason Provided!"}`
+          `You Have Been Kicked From **${message.guild.name}** For ${
+            Reason || "No Reason Provided!"
+          }`
         );
       message.channel.send(embed);
       console.log(
@@ -75,5 +81,5 @@ module.exports = {
     }
 
     //End
-  }
+  },
 };

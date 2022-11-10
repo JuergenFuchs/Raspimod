@@ -3,10 +3,10 @@ const { MessageEmbed } = require("discord.js");
 const { Color } = require("../../config.js");
 const userID = "428872151672684544";
 module.exports = {
-  name: "mute",
+  name: "nonerd",
   aliases: [],
-  description: "Mute A User!",
-  usage: "Mute <Mention User> | <Reason>",
+  description: "Unnerd A User!",
+  usage: "Unnerd <Mention User>",
   run: async (client, message, args) => {
     //Start
     message.delete();
@@ -27,32 +27,20 @@ module.exports = {
     if (!Member) return message.channel.send(`Please Mention A User!`);
 
     let Role = message.guild.roles.cache.find(
-      (role) => role.name === "Muted"
+      (role) => role.name === "nerd"
     ).id;
 
     if (!Role)
       return message.channel.send(
-        `Please Create Mute Role | Role Name : Muted`
+        "There is now nerd role, create one with r?nerdcreate or make one manually"
       );
-
-    if (Member.roles.cache.has(Role)) {
-      return message.channel.send(`Member Is Already Muted!`);
+let person = message.guild.member(message.mentions.users.first());
+    if (!Member.roles.cache.has(Role)) {
+      return message.channel.send(`Member Is Already a nerd!`);
     }
-
-    let Reason = args.slice(1).join(" ");
-
-    let Embed = new MessageEmbed()
-      .setColor(Color)
-      .setTitle(`Member Muted!`)
-      .addField(`Moderator`, `${message.author.tag} (${message.author.id}`)
-      .addField(`Muted Member`, `${Member.user.tag} (${Member.user.id})`)
-      .addField(`Reason`, `${Reason || "No Reason Provided!"}`)
-      .setFooter(`Requested by ${message.author.username}`)
-      .setTimestamp();
-
-    if (Role && !Member.roles.cache.has(Role)) {
-      Member.roles.add([Role]);
-      return message.channel.send(Embed);
+    if (Role && person.roles.cache.has(Role)) {
+      person.roles.remove([Role]);
+      return message.channel.send("they arent a nerd anymore!");
     } else {
       return message.channel.send(`Something Went Wrong, Try Again Later!`);
     }
